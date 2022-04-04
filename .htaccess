@@ -1,0 +1,7 @@
+Options +FollowSymLinks 
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^profile/$ controller/profile.cntrl.php [L]
+RewriteRule ^guild controller/guild.cntrl.php [L]

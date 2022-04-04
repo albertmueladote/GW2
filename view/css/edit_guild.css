@@ -1,0 +1,42 @@
+/**
+ * @Author: Your name
+ * @Date:   2022-04-03 03:03:53
+ * @Last Modified by:   Your name
+ * @Last Modified time: 2022-04-03 21:02:17
+ */
+
+ .main_panel{
+    margin: 10px;
+ }
+
+.row{
+    border: 1px solid black;
+}
+
+.column{
+    border: 1px solid black;
+}
+.row_panel{
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.row_panel div{
+    vertical-align: top;
+    display: inline-block;
+    float: right;
+}
+
+textarea{
+    width: 90%;
+    margin: 0 auto;
+    resize: none;
+}
+
+.text_content.disabled{
+    display: none;
+}
+
+.image_content.disabled{
+    display: none;
+}
