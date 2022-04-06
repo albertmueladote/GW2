@@ -12,4 +12,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="<?php echo JS . 'main.js'?>"></script>
     <script src="<?php echo JS . 'topmenu.js'?>"></script>
+    <script>
+        $(window).on('load', function () {
+            $('.outer-loader').delay(1000).fadeOut('slow');
+        });
+    </script>
 </footer>

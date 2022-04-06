@@ -1,0 +1,34 @@
+/**
+ * @Author: Your name
+ * @Date:   2022-04-03 03:03:53
+ * @Last Modified by:   Your name
+ * @Last Modified time: 2022-04-03 21:02:17
+ */
+
+.outer-loader {
+  width: auto;
+  height: 100vh;
+  border: dotted hsl(0, 0%, 67%) 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #4b608e;
+}
+
+.inner-loader-img {
+  text-align: center;
+  background: url('/view/media/loading.gif') no-repeat center;
+  background-size: contain;
+  height: 40%;
+  width: 40%;
+}
+
+p {
+  position: relative;
+  top: 100%;
+  transform: translateY(-50%);
+  padding: 35px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  color: #000000;
+}

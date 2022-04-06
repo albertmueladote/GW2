@@ -9,8 +9,8 @@
 session_start();
 
 //define("ROOT", (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/gw2/');
-define("ROOT", (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/gw2/');
-define("PATH", $_SERVER['DOCUMENT_ROOT'] . '/gw2/');
+define("ROOT", (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/');
+define("PATH", $_SERVER['DOCUMENT_ROOT'] . '/');
 define("_CLASS", PATH . "class/");
 define("VIEW", PATH . "view/");
 define("CONTROLLER", "../controller/");
@@ -27,7 +27,7 @@ define("URL_GUILD_API", 'guild/');
 
 define("HOST_DB", "localhost");
 define("USER_DB", "root");
-define("PASSWORD_DB", "");
+define("PASSWORD_DB", "root");
 define("DATABASE_DB", "gw2");
 
 define("PASSWORD", "NF#%=cU5LyGcE*?$]+BE%]u}J@qPrG(4");

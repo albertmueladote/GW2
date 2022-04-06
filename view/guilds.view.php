@@ -6,16 +6,9 @@
  * @Last Modified time: 2022-04-06 03:44:05
  */
 ?>
-
-<!DOCTYPE html>
-<html>
-  <?php require(BLOCKS . 'head.php'); ?>
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
-  <link href="https://www.jsviews.com/samples/samples.css" rel="stylesheet" />
-  <link rel="stylesheet" href="<?php echo CSS . 'guilds.css'?>">
-  <link rel="stylesheet" href="<?php echo CSS . 'topmenu.css'?>">
-  <?php require(BLOCKS . 'topmenu.php'); ?>
-  <body>
+  <?php 
+  $page = 'guilds';
+  require(BLOCKS . 'layout.php'); ?>
     <div class="container-fluid">
     </div>
     <?php require(BLOCKS . 'footer.php'); ?>

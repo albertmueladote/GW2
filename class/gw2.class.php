@@ -26,6 +26,9 @@ class gw2 {
         $mysqli  = mysqli_connect(HOST_DB, USER_DB, PASSWORD_DB, DATABASE_DB);
         if (!$mysqli ) {
             die('No pudo conectarse: ' . mysql_error());
+        } else {
+            // Change character set to utf8
+            $mysqli -> set_charset("utf8");
         }
 
         $stmt = $mysqli->prepare($query);
