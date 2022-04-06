@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-04-2022 a las 12:11:55
+-- Tiempo de generación: 06-04-2022 a las 09:32:37
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 7.3.31
 
@@ -72,7 +72,14 @@ CREATE TABLE `guild_block` (
 
 INSERT INTO `guild_block` (`id`, `guild`, `type`, `value`, `row`, `column`, `created`, `modifed`) VALUES
 (1, 4, 'text', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.', 1, 1, '2022-04-03 21:49:24', '2022-04-03 21:49:24'),
-(2, 4, 'text', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 3, 2, '2022-04-03 21:49:24', '2022-04-03 21:49:24');
+(2, 4, 'text', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 2, 1, '2022-04-03 21:49:24', '2022-04-03 21:49:24'),
+(3, 4, 'text', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.', 2, 2, '2022-04-03 21:49:24', '2022-04-03 21:49:24'),
+(4, 3, 'text', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 1, 1, '2022-04-03 21:49:24', '2022-04-03 21:49:24'),
+(5, 3, 'text', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 2, 1, '2022-04-03 21:49:24', '2022-04-03 21:49:24'),
+(6, 3, 'text', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.', 2, 2, '2022-04-03 21:49:24', '2022-04-03 21:49:24'),
+(7, 1, 'text', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 1, 1, '2022-04-03 21:49:24', '2022-04-03 21:49:24'),
+(8, 1, 'text', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 2, 1, '2022-04-03 21:49:24', '2022-04-03 21:49:24'),
+(9, 1, 'text', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.', 2, 2, '2022-04-03 21:49:24', '2022-04-03 21:49:24');
 
 -- --------------------------------------------------------
 
@@ -95,9 +102,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `api`, `password`, `last_login`, `modifed`, `created`) VALUES
-(1, 'Albert', '688DFABB-B97B-3E42-B07E-640FF87CDF2F9CF33BBE-1E58-4AD7-A54C-CA093F80667C', '8eebc1f74a9966a0ac5b55ff9660a8891a040808618d70cdfd601564df8a0e6f', '2022-04-04 09:24:26', '2029-03-22 12:22:39', '2029-03-22 12:22:39'),
+(1, 'Albert', '688DFABB-B97B-3E42-B07E-640FF87CDF2F9CF33BBE-1E58-4AD7-A54C-CA093F80667C', '8eebc1f74a9966a0ac5b55ff9660a8891a040808618d70cdfd601564df8a0e6f', '2022-04-06 09:10:11', '2029-03-22 12:22:39', '2029-03-22 12:22:39'),
 (2, 'Laura', '37F8BFF6-A343-7B41-8237-82C3F77DE3E1C4616424-AFF8-4579-9043-44F929909B91', '8eebc1f74a9966a0ac5b55ff9660a8891a040808618d70cdfd601564df8a0e6f', '2022-04-01 16:06:28', '2029-03-22 12:22:57', '2029-03-22 12:22:57'),
-(4, 'Fer', 'FA9FE1E6-ACCB-BB4D-A35A-03180A901AE54281DE76-EB66-496D-9384-038DCB335698', '8eebc1f74a9966a0ac5b55ff9660a8891a040808618d70cdfd601564df8a0e6f', '2022-04-01 14:15:28', '2022-04-01 14:01:30', '2022-04-01 14:01:30');
+(4, 'Fer', 'FA9FE1E6-ACCB-BB4D-A35A-03180A901AE54281DE76-EB66-496D-9384-038DCB335698', '8eebc1f74a9966a0ac5b55ff9660a8891a040808618d70cdfd601564df8a0e6f', '2022-04-05 17:01:01', '2022-04-01 14:01:30', '2022-04-01 14:01:30');
 
 -- --------------------------------------------------------
 
@@ -173,7 +180,7 @@ ALTER TABLE `guild`
 -- AUTO_INCREMENT de la tabla `guild_block`
 --
 ALTER TABLE `guild_block`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `user`
