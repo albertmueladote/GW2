@@ -14,7 +14,7 @@
     <script src="<?php echo JS . 'topmenu.js'?>"></script>
     <script>
         $(window).on('load', function () {
-            $('.outer-loader').delay(1000).fadeOut('slow');
+            $('.outer-loader').delay(500).fadeOut('slow');
         });
     </script>
 </footer>

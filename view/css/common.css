@@ -10,9 +10,18 @@
   height: 100vh;
   border: dotted hsl(0, 0%, 67%) 2px;
   display: flex;
+  position:fixed;
   align-items: center;
   justify-content: center;
   background-color: #4b608e;
+  position:fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  z-index:1;
 }
 
 .inner-loader-img {
