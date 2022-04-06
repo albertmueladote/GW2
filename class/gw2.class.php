@@ -3,7 +3,7 @@
  * @Author: Albert
  * @Date:   2022-03-25 13:27:45
  * @Last Modified by:   Your name
- * @Last Modified time: 2022-04-03 02:04:56
+ * @Last Modified time: 2022-04-06 02:14:07
  */
 
 
@@ -29,14 +29,16 @@ class gw2 {
         }
 
         $stmt = $mysqli->prepare($query);
-
-    	$stmt->bind_param($types, ...$params);
-
+        if(sizeof($params) > 0){
+    	    $stmt->bind_param($types, ...$params);
+        }
         $stmt->execute();
 
         if (strpos($query, 'SELECT') !== false) {
             $rows = $stmt->get_result();
-            if($rows->num_rows == 1){
+            if($rows->num_rows == 0){
+                $result = array();
+            }elseif($rows->num_rows == 1){
                 $result = $rows->fetch_assoc();
             }elseif($rows->num_rows > 1){
                 $result = array();
@@ -94,6 +96,11 @@ class gw2 {
                             'Ú'=>'U', 'Û'=>'U', 'Ü'=>'U', 'Ý'=>'Y', 'Þ'=>'B', 'ß'=>'Ss', 'à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a', 'å'=>'a', 'æ'=>'a', 'ç'=>'c',
                             'è'=>'e', 'é'=>'e', 'ê'=>'e', 'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i', 'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o',
                             'ö'=>'o', 'ø'=>'o', 'ù'=>'u', 'ú'=>'u', 'û'=>'u', 'ý'=>'y', 'þ'=>'b', 'ÿ'=>'y', ' ' => '-');
+        return strtr($string, $unwanted_array);
+    }
+
+    public function cleanStringSpaces($string){
+        $unwanted_array = array('-' => ' ');
         return strtr($string, $unwanted_array);
     }
 }

@@ -2,7 +2,7 @@
  * @Author: Albert
  * @Date:   2022-04-02 00:06:21
  * @Last Modified by:   Your name
- * @Last Modified time: 2022-04-04 03:07:47
+ * @Last Modified time: 2022-04-06 03:14:21
  */
 
 /**
@@ -18,11 +18,6 @@ function setParam(name, value, refresh)
 	    type : 'POST',
 	    dataType : 'json',
 	    success : function(data) {
-	       	if(JSON.parse(JSON.stringify(data)).result){
-	       		return JSON.parse(JSON.stringify(data)).result;
-	       	}else{
-	       		return false;
-	       	}
 	    },
 	    error : function(xhr, status) {
 	        
@@ -34,6 +29,7 @@ function setParam(name, value, refresh)
 	    }
 	});
 }
+
 /**
  * @param  {string} name
  * @param  {string} from
@@ -46,17 +42,13 @@ function getParam(name, from)
 	    type : 'POST',
 	    dataType : 'json',
 	    success : function(data) {
-	       	if(JSON.parse(JSON.stringify(data)).result){
-	       		console.log(JSON.parse(JSON.stringify(data)).result);
-	       	}else{
-	       		return false;
-	       	}
+			
 	    },
 	    error : function(xhr, status) {
 	        
 	    },
 	    complete : function(xhr, status) {
-	        console.log('complete');
+			
 	    }
 	});
 }

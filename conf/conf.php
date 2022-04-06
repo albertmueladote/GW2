@@ -3,7 +3,7 @@
  * @Author: Albert
  * @Date:   2022-03-25 12:35:21
  * @Last Modified by:   Your name
- * @Last Modified time: 2022-04-04 03:11:35
+ * @Last Modified time: 2022-04-04 19:17:50
  */
 
 session_start();
@@ -16,6 +16,7 @@ define("VIEW", PATH . "view/");
 define("CONTROLLER", "../controller/");
 define("CSS", "../view/css/");
 define("JS", "../view/js/");
+define("JSRENDER", "../controller/jsrender/");
 define("BLOCKS", PATH . "view/blocks/");
 define("MEDIA", "../view/media/");
 define("TOOLS", "../tools/");

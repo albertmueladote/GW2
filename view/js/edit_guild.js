@@ -2,34 +2,69 @@
  * @Author: Albert
  * @Date:   2022-04-02 23:13:32
  * @Last Modified by:   Your name
- * @Last Modified time: 2022-04-04 09:27:23
+ * @Last Modified time: 2022-04-05 16:55:10
  */
 
 $('#add_row').click(function(){
-    createRow();
+    createColumn(createRow());
 });
 
-createRow();
-createColumn(1);
-createColumn(1);
+load();
 
-var data = [
-    {
-      "name": "Robert",
-      "nickname": "Bob",
-      "showNickname": true
-    },
-    {
-      "name": "Susan",
-      "nickname": "Sue",
-      "showNickname": false
-    }
-  ];
-var template = $.templates("#block_template");
+function load()
+{
+    $.ajax({
+	    url : '../controller/ajax/guild_view.ajax.php',
+	    data : {},
+	    type : 'POST',
+	    dataType : 'json',
+	    success : function(data) {
+	       	if(JSON.parse(JSON.stringify(data)).result){
+                var array = JSON.parse(JSON.stringify(data)).result;
+                var last_row = 0;
+                $.each(array, function( row_id, blocks ) {
+                    if(last_row < row_id){
+                        last_row = row_id;
+                    }
+                });
+                if(last_row > 0){
+                    for(var x = 1; x <= last_row; x++){
+                        createRow();
+                        if(x in array){
+                            var last_block = 0
+                            $.each(array[x], function( block_id, block ) {
+                                if(last_block < block_id){
+                                    last_block = block_id;
+                                }
+                            });
+                            for(var y = 1; y <= last_block; y++){
+                                if(y in array[x]){
+                                    if(array[x][y].type == 'text'){
+                                        createColumn(x,array[x][y].value);
+                                    }
+                                }else{
+                                    createColumn(x);
+                                }
+                                
+                            }
+                        }else{
+                            createColumn(x);
+                        }
+                    }
+                }
+	       	}else{
+	       		return false;
+	       	}
+	    },
+	    error : function(xhr, status) {
+	        
+	    },
+	    complete : function(xhr, status) {
+            
+	    }
+    });
+}
 
-var htmlOutput = template.render(data);
-
-$(".container-fluid").html(htmlOutput);
 /**
  */
 function createRow(){
@@ -37,17 +72,12 @@ function createRow(){
     if($('.container-fluid .row').length > 0){
         row = $('.container-fluid .row').last().data('row') + 1;
     }
-    $('.container-fluid').append('<div data-row="' + row + '" class="row row_' + row + '"><div class="row_panel"></div></div>');
-    createColumn(row);
-    createRowContent(row);
-}
 
-/**
- * @param  {int} row
- */
-function createRowContent(row){
-    $('.container-fluid .row_' + row + ' .row_panel').append('<div><button data-row="' + row + '" class="add_column">Añadir columna</button></div>');
-    $('.container-fluid .row_' + row + ' .row_panel').append('<div><button data-row="' + row + '" class="remove_row">Eliminar fila</button></div>');
+    var data = [{"row": row}];
+    var template = $.templates("#edit_row_template");
+    var htmlOutput = template.render(data);
+    $(".container-fluid").append(htmlOutput);
+
     $('.container-fluid .row_' + row + ' .row_panel .add_column').click(function(){
         createColumn(row);
         if($('.container-fluid .row_' + row + ' .column').length == 4){
@@ -55,56 +85,62 @@ function createRowContent(row){
         }
     })
     $('.container-fluid .row_' + row + ' .remove_row').click(function(){
-        removeRow(row);
+        if(confirm("¿Eliminar fila y todas sus columnas?")){
+            removeRow(row);
+        }
     })
+    return row;
 }
 
 /**
  * @param  {int} row
  */
-function createColumn(row){
+function createColumn(row, text = ''){
     var column = 1;
     if($('.container-fluid .row_' + row + ' .column').length > 0){
         column = $('.container-fluid .row_' + row + ' .column').last().data('column') + 1;
     }
-    $('.container-fluid .row_' + row).append('<div data-column="' + column + '" class="column column_' + column + '"><div class="column_panel"></div></div>');
-    var col = 12 / $('.container-fluid .row_' + row + ' .column').length;
-    $('.container-fluid .row_' + row + ' .column').removeClass('col-12 col-6 col-4 col-3');
-    $('.container-fluid .row_' + row + ' .column').addClass('col-' + col);
-    createColumnContent(row, column);
-}
 
-/**
- * @param  {int} row
- * @param  {int} column
- */
-function createColumnContent(row, column){
-    $('.container-fluid .row_' + row + ' .column_' + column + ' .column_panel').append('<div><button data-row="' + row + '" class="remove_column">Eliminar columna</button><select class="column_content"><option value="text">Texto</option><option value="image">Imagen</option></select></div>');
-    $('.container-fluid .row_' + row + ' .column_' + column + ' .column_panel').append('<div class="textarea_content"><textarea name="textarea_' + row + '_' + column + '" rows="10" cols="50"></textarea></div><div class="image_content"><input type="file" accept="image/png, image/jpeg"></div>');
-    $('.container-fluid .row_' + row + ' .column_' + column + ' .column_panel .image_content').hide();
+    var data = [{"column": column, "row": row, "text": text}];
+    var template = $.templates("#edit_block_template");
+    var htmlOutput = template.render(data);
+    $('.container-fluid .row_' + row).append(htmlOutput);
+
+    resizeColumns(row);
+    
     CKEDITOR.replace('textarea_' + row + '_' + column);
+
     $('.container-fluid .row_' + row + ' .column_' + column + ' .column_panel .remove_column').click(function(){
-        removeColumn(row, column);
-        if($('.container-fluid .row_' + row + ' .column').length == 1){
-            $('.container-fluid .row_' + row + ' .remove_column').prop('disabled', true);
-        }else{
-            $('.container-fluid .row_' + row + ' .remove_column').prop('disabled', false);
+        if(confirm("¿Eliminar columna?")){
+            removeColumn(row, column);
+            if($('.container-fluid .row_' + row + ' .column').length == 1){
+                $('.container-fluid .row_' + row + ' .remove_column').prop('disabled', true);
+            }else{
+                $('.container-fluid .row_' + row + ' .remove_column').prop('disabled', false);
+            }
         }
     })
+
+    $('.container-fluid .row_' + row + ' .column_' + column + ' .image_content').hide();
+    $('.container-fluid .row_' + row + ' .column_' + column + ' .textarea_content').show();
+
     $('.container-fluid .row_' + row + ' .column_' + column + ' .column_panel .column_content').change(function(){
         if($(this).val() == 'text'){
-            $('.container-fluid .row_' + row + ' .column_' + column + ' .column_panel .image_content').hide();
-            $('.container-fluid .row_' + row + ' .column_' + column + ' .column_panel .textarea_content').show();
+            $('.container-fluid .row_' + row + ' .column_' + column + ' .image_content').hide();
+            $('.container-fluid .row_' + row + ' .column_' + column + ' .textarea_content').show();
         }else if($(this).val() == 'image'){
-            $('.container-fluid .row_' + row + ' .column_' + column + ' .column_panel .image_content').show();
-            $('.container-fluid .row_' + row + ' .column_' + column + ' .column_panel .textarea_content').hide();
+            $('.container-fluid .row_' + row + ' .column_' + column + ' .image_content').show();
+            $('.container-fluid .row_' + row + ' .column_' + column + ' .textarea_content').hide();
         }
     })
+
     if($('.container-fluid .row_' + row + ' .column').length == 1){
         $('.container-fluid .row_' + row + ' .remove_column').prop('disabled', true);
     }else{
         $('.container-fluid .row_' + row + ' .remove_column').prop('disabled', false);
     }
+
+    return column;
 }
 
 /**
@@ -120,8 +156,15 @@ function removeRow(row){
  */
 function removeColumn(row, column){
     $('.container-fluid .row_' + row + ' .column_' + column).remove();
+    resizeColumns(row);
+}
+
+/**
+ * @param  {int} row
+ */
+function resizeColumns(row)
+{
     var col = 12 / $('.container-fluid .row_' + row + ' .column').length;
     $('.container-fluid .row_' + row + ' .column').removeClass('col-12 col-6 col-4 col-3');
     $('.container-fluid .row_' + row + ' .column').addClass('col-' + col);
 }
-

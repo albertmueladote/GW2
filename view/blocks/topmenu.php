@@ -3,13 +3,14 @@
  * @Author: Albert
  * @Date:   2022-03-26 00:10:40
  * @Last Modified by:   Your name
- * @Last Modified time: 2022-04-03 02:19:41
+ * @Last Modified time: 2022-04-05 18:15:12
  */
 ?>
 <div class="topnav">
 <?php if(isset($_SESSION[SESSION_NAME])){ ?>
       <?php if($_SESSION[SESSION_NAME]) { ?>
-        <a class="<?php echo (strcmp($_SESSION['current_landing'], 'profile' === 0) ? 'active' : ''); ?> profile" href="<?php echo ROOT; ?>"><?php echo $current_user->name; ?></a>
+        <a class="<?php echo (strcmp($_SESSION['current_landing'], 'profile') === 0 ? 'active' : ''); ?> profile" href="<?php echo ROOT . 'perfil/'; ?>"><?php echo $current_user->name; ?></a>
+        <a class="<?php echo (strcmp($_SESSION['current_landing'], 'guilds') === 0 ? 'active' : ''); ?> guilds" href="<?php echo ROOT . 'clanes/'; ?>">Clanes</a>
           <?php foreach($current_user_guilds->leader_guilds AS $guild) {?>
             <a class="guild <?php echo (strcmp($gw2->cleanString($guild->name), $gw2->cleanString($current_guild)) === 0 ? 'active' : ''); ?>" data-name="<?php echo $gw2->cleanString($guild->name); ?>" href="<?php echo ROOT . 'guild/' . $gw2->cleanString($guild->name); ?>">
               <img class="img-fluid" alt="red_tag" src="<?php echo MEDIA . 'red_tag.png' ?>" /><?php echo $guild->name; ?>

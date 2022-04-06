@@ -3,12 +3,8 @@
  * @Author: Albert
  * @Date:   2022-04-02 02:34:09
  * @Last Modified by:   Your name
- * @Last Modified time: 2022-04-03 02:12:28
+ * @Last Modified time: 2022-04-04 19:56:59
  */
-
-session_start();
-
-require_once('../../conf/conf.php');
 
 if(isset($_POST['name']) && isset($_POST['from'])){
 	if(strcmp($_POST['from'], 'conf') == 0){
