@@ -8,6 +8,7 @@
 ?>
 <!DOCTYPE html>
 <html>
+  <link rel="shortcut icon" href="/view/media/loading.gif"/>
   <?php require(BLOCKS . 'head.php'); ?>
   <link rel="stylesheet" href="<?php echo CSS . 'common.css'?>">
   <?php
