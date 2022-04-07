@@ -5,7 +5,7 @@
  * @Last Modified time: 2022-04-03 21:02:17
  */
 
-.outer-loader {
+.outer-loader { 
   width: auto;
   height: 100vh;
   border: dotted hsl(0, 0%, 67%) 2px;
