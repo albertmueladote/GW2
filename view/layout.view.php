@@ -8,6 +8,7 @@
 ?>
 <!DOCTYPE html>
 <html>
+  <head>
   <link rel="shortcut icon" href="/view/media/loading.gif"/>
   <?php require(BLOCKS . 'head.php'); ?>
   <link rel="stylesheet" href="<?php echo CSS . 'common.css'?>">
@@ -45,6 +46,7 @@
 ?>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  </head>
   <body>
     <div class="outer-loader">
         <div class="inner-loader-img"> 
