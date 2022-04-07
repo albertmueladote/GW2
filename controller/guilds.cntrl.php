@@ -11,4 +11,5 @@ require_once(_CLASS . 'guilds.class.php');
 
 $_SESSION['current_landing'] = 'guilds';
 
-require_once(VIEW . 'guilds.view.php');
+$page = "guilds";
+require_once(VIEW . 'layout.view.php');

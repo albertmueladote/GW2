@@ -4,11 +4,15 @@
  * @Last Modified by:   Your name
  * @Last Modified time: 2022-04-03 21:02:17
  */
+.container-fluid {
+  width:1024px;
+  margin: 0 auto;
+  padding: 20px 0 0 0;
+}
 
 .outer-loader { 
   width: auto;
   height: 100vh;
-  border: dotted hsl(0, 0%, 67%) 2px;
   display: flex;
   position:fixed;
   align-items: center;
@@ -40,4 +44,10 @@ p {
   font-weight: bold;
   font-size: 0.9rem;
   color: #000000;
+}
+
+@media screen and (max-width: 1024px) {
+  .container-fluid {
+    width:100%;
+  }
 }

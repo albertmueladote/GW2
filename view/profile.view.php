@@ -6,13 +6,8 @@
  * @Last Modified time: 2022-04-03 13:39:52
  */
 ?>
-  <?php
-   $page = 'profile';
-   require(BLOCKS . 'layout.php'); 
-  ?>
+  
+  <div class="container-fluid">
     vista de perfil
     </div>
-    <?php require(BLOCKS . 'footer.php'); ?>
     <link rel="stylesheet" href="<?php echo JS . 'profile.js'?>">
-  </body>
-</html>

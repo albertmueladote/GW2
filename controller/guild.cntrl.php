@@ -16,5 +16,6 @@ foreach($current_user_guilds->leader_guilds AS $guild){
       $is_leader = true;
    }
 }
-require_once(VIEW . 'guild.view.php');
+$page = "guild";
+require_once(VIEW . 'layout.view.php');
 ?>

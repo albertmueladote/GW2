@@ -5,9 +5,11 @@
  * @Last Modified time: 2022-04-05 16:49:52
  */
 .row{
-    border: 1px solid black;
+    padding:10px;
 }
+.row:nth-child(even) {background-color: #FFFFFF}
+.row:nth-child(odd)  {background-color: #f2f2f2}
 
 .column{
-    border: 1px solid black;
+    /*border: 1px solid black;*/
 }

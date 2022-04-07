@@ -6,14 +6,11 @@
  * @Last Modified time: 2022-04-06 03:23:25
  */
 ?>
-  <?php $page = 'guild';
-  require(BLOCKS . 'layout.php'); ?>
     <div class="container-fluid">
     </div>
     <?php if(isset($is_leader) && $is_leader) { ?>
       <div class="main_panel"><button id="add_row">Añadir fila</button></div>
     <?php } ?>
-    <?php require(BLOCKS . 'footer.php'); ?>
     <script src="<?php echo JS . 'guild.js'?>"></script>
     <script src="https://www.jsviews.com/download/jsrender.min.js"></script>
     <?php if(isset($is_leader) && $is_leader) { ?>

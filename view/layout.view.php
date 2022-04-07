@@ -31,6 +31,7 @@
   <link href="https://www.jsviews.com/samples/samples.css" rel="stylesheet" />
   <link rel="stylesheet" href="<?php echo CSS . 'guilds.css'?>">
   <link rel="stylesheet" href="<?php echo CSS . 'topmenu.css'?>">
+  
 <?php
       break;
       case 'profile':
@@ -41,6 +42,8 @@
       break;
   }
 ?>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <body>
     <div class="outer-loader">
         <div class="inner-loader-img"> 
@@ -49,6 +52,11 @@
     </div>
 <?php
    require(BLOCKS . 'topmenu.php');
+   require(VIEW . $page.'.view.php');
 ?>
+<?php require(BLOCKS . 'footer.php'); ?>
+</body>
+</html>
+
 
 

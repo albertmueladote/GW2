@@ -12,6 +12,7 @@ require_once(_CLASS . 'user_guilds.class.php');
 
 $_SESSION['current_landing'] = 'profile';
 
-require_once(VIEW . 'profile.view.php');
+$page = "profile";
+require_once(VIEW . 'layout.view.php');
 
 ?>
