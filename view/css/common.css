@@ -4,11 +4,18 @@
  * @Last Modified by:   Your name
  * @Last Modified time: 2022-04-03 21:02:17
  */
-.container-fluid {
-  width:1024px;
-  margin: 0 auto;
-  padding: 20px 0 0 0;
+ .bg{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #FFFFFF;
+  background: url('/view/media/background.jpg') no-repeat center;
+  background-size: cover;
+  height: 200px;
+  width: 100%;
 }
+
 
 .outer-loader { 
   width: auto;
@@ -46,8 +53,3 @@ p {
   color: #000000;
 }
 
-@media screen and (max-width: 1024px) {
-  .container-fluid {
-    width:100%;
-  }
-}

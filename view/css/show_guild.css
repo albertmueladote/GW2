@@ -7,6 +7,9 @@
 .row{
     padding:10px;
 }
+.column {
+    max-width:1024px;margin:0 auto;
+}
 .row:nth-child(even) {background-color: #FFFFFF}
 .row:nth-child(odd)  {background-color: #f2f2f2}
 
