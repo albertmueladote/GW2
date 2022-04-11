@@ -6,3 +6,6 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^perfil/$ controller/profile.cntrl.php [L]
 RewriteRule ^guild controller/guild.cntrl.php [L]
 RewriteRule ^clanes controller/guilds.cntrl.php [L]
+RewriteRule ^login controller/login.cntrl.php [L]
+RewriteRule ^logout controller/logout.cntrl.php [L]
+RewriteRule ^registrarse controller/main.cntrl.php [L]

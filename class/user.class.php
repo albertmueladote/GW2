@@ -3,7 +3,7 @@
  * @Author: Albert
  * @Date:   2022-03-25 12:47:23
  * @Last Modified by:   Your name
- * @Last Modified time: 2022-04-03 02:12:20
+ * @Last Modified time: 2022-04-11 11:07:56
  */
 
 require_once('gw2.class.php');
@@ -46,7 +46,8 @@ class user extends gw2{
         $types = "s";
         $params = array($this->api);
         $user = $this->query($query, $types, $params);
-        if(!is_null($user))
+
+        if(sizeof($user) > 0)
         {
             $this->id = $user['id'];
             $this->name = $user['name'];
@@ -55,7 +56,30 @@ class user extends gw2{
             $this->last_login = $user['last_login'];
             $this->modifed = $user['modifed'];
             $this->created = $user['created'];
+            return true;
         }
+        return false;
+    }
+
+    public function loadByName()
+    {
+        $query = 'SELECT * FROM user WHERE name = ?';
+        $types = "s";
+        $params = array($this->name);
+        $user = $this->query($query, $types, $params);
+
+        if(sizeof($user) > 0)
+        {
+            $this->id = $user['id'];
+            $this->name = $user['name'];
+            $this->api = $user['api'];
+            $this->password = $user['password'];
+            $this->last_login = $user['last_login'];
+            $this->modifed = $user['modifed'];
+            $this->created = $user['created'];
+            return true;
+        }
+        return false;
     }
     
     /**
@@ -69,7 +93,7 @@ class user extends gw2{
         $types = "ss";
         $params = array($this->name, $this->password);
         $user = $this->query($query, $types, $params);
-        if(!is_null($user))
+        if(sizeof($user) > 0)
         {
             $this->id = $user['id'];
             $this->name = $user['name'];
@@ -85,7 +109,9 @@ class user extends gw2{
             array_push($params, $this->id);
             
             $id = $this->query($query, $types, $params);
+            return true;
         }
+        return false;
     }
         
     /**
@@ -108,7 +134,9 @@ class user extends gw2{
             $this->last_login = $user['last_login'];
             $this->modifed = $user['modifed'];
             $this->created = $user['created'];
+            return true;
         }
+        return false;
     }
 
     
@@ -119,32 +147,35 @@ class user extends gw2{
      */
     public function save()
     {
-        $query = 'INSERT INTO user (name, api, password, last_login, modifed, created) VALUES (?, ?, ?, ?, ?, ?)';
-        $types = "ssssss";
-        $params = array();
-        
-        $user_data = $this->curl('account', $this->api);
-        array_push($params, $this->name);
-        if(is_null($user_data)){
-            array_push($params, null);
-        }else{
-            array_push($params, $this->api);
+        if(!$this->loadByName()){
+            $query = 'INSERT INTO user (name, api, password, last_login, modifed, created) VALUES (?, ?, ?, ?, ?, ?)';
+            $types = "ssssss";
+            $params = array();
+            
+            $user_data = $this->curl('account', $this->api);
+            array_push($params, $this->name);
+            if(is_null($user_data)){
+                array_push($params, null);
+            }else{
+                array_push($params, $this->api);
+            }
+            array_push($params, $this->password);
+            array_push($params, date('y-m-d H:i:s'));
+            array_push($params, date('y-m-d H:i:s'));
+            array_push($params, date('y-m-d H:i:s'));
+            
+            $id = $this->query($query, $types, $params);
+            
+            $guild = new guild();
+            $guild->saveUserGuilds($user_data, $this->api);
+            
+            if(!is_null($id))
+            {
+                $this->id = $id;
+                return $this->load();
+            }
         }
-        array_push($params, $this->password);
-        array_push($params, date('y-m-d H:i:s'));
-        array_push($params, date('y-m-d H:i:s'));
-        array_push($params, date('y-m-d H:i:s'));
-        
-        $id = $this->query($query, $types, $params);
-        $guild = new guild();
-        $guild->saveUserGuilds($user_data, $this->api);
-        
-        if(!is_null($id))
-        {
-            $this->id = $id;
-            $this->load();
-        }
-        
+        return false;
     }
     
     /**
@@ -170,8 +201,9 @@ class user extends gw2{
         if(!is_null($id))
         {
             $this->id = $id;
-            $this->load();
+            return $this->load();
         }
+        return false;
     }
     
     /**
@@ -197,7 +229,9 @@ class user extends gw2{
             $this->last_login = null;
             $this->modifed = null;
             $this->created = null;
+            return true;
         }
+        return false;
     }
     
     /**

@@ -3,9 +3,12 @@
  * @Author: Albert
  * @Date:   2022-03-26 00:16:02
  * @Last Modified by:   Your name
- * @Last Modified time: 2022-04-03 02:15:23
+ * @Last Modified time: 2022-04-11 03:32:57
  */
 ?>
+<link rel="stylesheet" href="<?php echo CSS . 'footer.css'?>">
+<div class="footer">
+</div>
 <footer>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

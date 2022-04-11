@@ -3,7 +3,7 @@
  * @Author: Albert
  * @Date:   2022-04-05 17:08:08
  * @Last Modified by:   Your name
- * @Last Modified time: 2022-04-06 03:44:05
+ * @Last Modified time: 2022-04-10 19:22:11
  */
 ?>
 
@@ -13,7 +13,6 @@
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
   <link href="https://www.jsviews.com/samples/samples.css" rel="stylesheet" />
   <link rel="stylesheet" href="<?php echo CSS . 'guilds.css'?>">
-  <link rel="stylesheet" href="<?php echo CSS . 'topmenu.css'?>">
   <?php require(BLOCKS . 'topmenu.php'); ?>
   <body>
     <div class="container-fluid">

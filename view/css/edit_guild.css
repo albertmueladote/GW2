@@ -2,23 +2,82 @@
  * @Author: Your name
  * @Date:   2022-04-03 03:03:53
  * @Last Modified by:   Your name
- * @Last Modified time: 2022-04-03 21:02:17
+ * @Last Modified time: 2022-04-11 19:41:11
  */
 
- .main_panel{
-    margin: 10px;
+ @font-face {font-family: "Cronos Pro"; src: url("//db.onlinewebfonts.com/t/a059538dbb553b4978607a6366a9653b.eot"); src: url("//db.onlinewebfonts.com/t/a059538dbb553b4978607a6366a9653b.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/a059538dbb553b4978607a6366a9653b.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/a059538dbb553b4978607a6366a9653b.woff") format("woff"), url("//db.onlinewebfonts.com/t/a059538dbb553b4978607a6366a9653b.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/a059538dbb553b4978607a6366a9653b.svg#Cronos Pro") format("svg"); }
+
+ body{
+     background-color: #f1f3f4;
  }
 
-.row{
-    border: 1px solid black;
+ .container-fluid{
+    box-shadow: 5px 5px 5px 5px #888888;
+ }
+
+ .column.{
+     top: -32px;
+ }
+ 
+ button{
+    font-weight: 500;
+    background: rgb(170, 4, 4);
+    color: rgb(255, 255, 255)!important;
+    padding: 0 5px;
+    font-size: 14px;
+    line-height: 2;
+    text-decoration: none;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    cursor: pointer;
+ }
+
+ .cke_top{
+     display: none!important;
+ }
+
+ .cke_chrome{
+     border: none!important;
+ }
+
+ .cke_bottom{
+     display: none!important;
+ }
+
+ .cke_button__removecolumn{
+    font-weight: 500!important;
+    background: rgb(170, 4, 4)!important;
+    color: rgb(255, 255, 255)!important;
+    border-radius: 4px!important;
+    border: 1px solid transparent!important;
+    cursor: pointer!important;
+    margin-left: 3px!important;
 }
 
-.column{
-    border: 1px solid black;
-}
+ select{
+    font-weight: 500;
+    background: rgb(170, 4, 4);
+    color: rgb(255, 255, 255)!important;
+    padding: 5px 10px;
+    margin: 2px;
+    font-size: 14px;
+    line-height: 2;
+    text-decoration: none;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    cursor: pointer;
+ }
+
+ .row{
+     margin-bottom: 32px;
+     position: relative;
+ }
+
 .row_panel{
-    width: 100%;
-    margin-bottom: 10px;
+    position: absolute;
+    top: 50%;
+    right: -16%;
+    transform: translateY(-50%);
 }
 
 .row_panel div{
@@ -27,10 +86,19 @@
     float: right;
 }
 
+.column_panel div{
+    display: inline-block;
+    vertical-align: top;
+}
+
 textarea{
     width: 90%;
     margin: 0 auto;
     resize: none;
+}
+
+body{
+    font-family: Cronos Pro!important;
 }
 
 .text_content.disabled{

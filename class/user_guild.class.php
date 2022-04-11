@@ -3,7 +3,7 @@
  * @Author: Albert
  * @Date:   2022-03-29 11:59:39
  * @Last Modified by:   Your name
- * @Last Modified time: 2022-04-03 02:15:54
+ * @Last Modified time: 2022-04-11 11:03:28
  */
 
 require_once('gw2.class.php');
@@ -45,7 +45,7 @@ class user_guild extends gw2{
         $types = "ss";
         $params = array($this->user, $this->guild);
         $user = $this->query($query, $types, $params);
-        if(!is_null($user))
+        if(sizeof($user) > 0)
         {
             $this->id = $user['id'];
             $this->name = $user['user'];
@@ -115,7 +115,7 @@ class user_guild extends gw2{
         array_push($params, $this->leader);
         array_push($params, date('y-m-d H:i:s'));
         array_push($params, $this->id);
-
+        
         $id = $this->query($query, $types, $params);
 
         if(!is_null($id))

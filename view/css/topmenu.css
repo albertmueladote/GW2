@@ -2,68 +2,78 @@
  * @Author: Albert
  * @Date:   2022-03-29 13:24:14
  * @Last Modified by:   Your name
- * @Last Modified time: 2022-04-03 02:13:02
+ * @Last Modified time: 2022-04-11 03:16:30
  */
 
- * {box-sizing: border-box;}
+ @font-face {font-family: "Acumin Pro Condensed"; src: url("//db.onlinewebfonts.com/t/9d98f534f006d8c613a5dc3ace7fe507.eot"); src: url("//db.onlinewebfonts.com/t/9d98f534f006d8c613a5dc3ace7fe507.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/9d98f534f006d8c613a5dc3ace7fe507.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/9d98f534f006d8c613a5dc3ace7fe507.woff") format("woff"), url("//db.onlinewebfonts.com/t/9d98f534f006d8c613a5dc3ace7fe507.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/9d98f534f006d8c613a5dc3ace7fe507.svg#Acumin Pro Condensed") format("svg"); }
 
-/* Style the navbar */
 .topnav {
   overflow: hidden;
-  background-color: #e9e9e9;
+  background-color: black;
+  margin-bottom: 10px;
+  position: relative;
 }
 
-/* Navbar links */
 .topnav a {
   float: left;
-  display: block;
-  color: black;
-  text-align: center;
-  padding: 14px 16px;
+  padding: 1em 1em;
   text-decoration: none;
-  font-size: 17px;
+  font-size: 20px;
+  color: #8c8c8c;
+  text-transform: uppercase;
+  font-family: Acumin Pro Condensed;
 }
 
-/* Navbar links on mouse-over */
 .topnav a:hover {
-  background-color: #ddd;
-  color: black;
+  color: #e1261c;
 }
 
-/* Active/current link */
 .topnav a.active {
-  background-color: #2196F3;
-  color: white;
+  color: #e1261c;
 }
 
-/* Style the input container */
 .topnav .login-container {
   float: right;
 }
 
 /* Style the input field inside the navbar */
-.topnav input[type=text] {
+.topnav input {
   padding: 6px;
-  margin-top: 8px;
+  margin-right: 8px;
   font-size: 17px;
   border: none;
-  width: 150px; /* adjust as needed (as long as it doesn't break the topnav) */
+  padding: 0.5em 0.6em;
+  border: 1px solid #ccc;
+  box-shadow: inset 0 1px 3px #ddd;
+  border-radius: 4px;
+  vertical-align: middle;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font-family: CronosPro,Helvetica,Arial,sans-serif;
 }
 
-/* Style the button inside the input container */
+.topnav .login-container{
+    position: absolute;
+    top: 50%;
+    right: 1%;
+    transform: translateY(-50%);
+}
+
 .topnav .login-container button {
-  float: right;
-  padding: 6px;
-  margin-top: 8px;
-  margin-right: 16px;
-  background: #ddd;
-  font-size: 17px;
   border: none;
+  float: right;
+  font-size: 20px;
+  font-weight: 400;
+  color: #ffc8ad;
+  background: linear-gradient(180deg,#aa1817,#3e1209);
+  padding: 6px 16px;
   cursor: pointer;
+  text-transform: uppercase;
 }
 
 .topnav .login-container button:hover {
-  background: #ccc;
+  background: #ee2e24;;
 }
 
 .topnav .guild img{
@@ -71,7 +81,6 @@
   margin-right: 5px;
 }
 
-/* Add responsiveness - On small screens, display the navbar vertically instead of horizontally */
 @media screen and (max-width: 600px) {
   .topnav .login-container {
     float: none;
@@ -83,8 +92,5 @@
     width: 100%;
     margin: 0;
     padding: 14px;
-  }
-  .topnav input[type=text] {
-    border: 1px solid #ccc;
   }
 }

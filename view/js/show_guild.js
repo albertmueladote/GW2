@@ -2,7 +2,7 @@
  * @Author: Albert
  * @Date:   2022-04-05 16:43:29
  * @Last Modified by:   Your name
- * @Last Modified time: 2022-04-05 16:53:45
+ * @Last Modified time: 2022-04-11 04:05:22
  */
 
  load();
@@ -65,14 +65,14 @@
  */
  function createRow(){
     var row = 1;
-    if($('.container-fluid .row').length > 0){
-        row = $('.container-fluid .row').last().data('row') + 1;
+    if($('.container-fluid .rows .row').length > 0){
+        row = $('.container-fluid .rows .row').last().data('row') + 1;
     }
 
     var data = [{"row": row}];
     var template = $.templates("#show_row_template");
     var htmlOutput = template.render(data);
-    $(".container-fluid").append(htmlOutput);
+    $(".container-fluid .rows").append(htmlOutput);
 
     return row;
 }
@@ -82,14 +82,14 @@
  */
 function createColumn(row, text = ''){
     var column = 1;
-    if($('.container-fluid .row_' + row + ' .column').length > 0){
-        column = $('.container-fluid .row_' + row + ' .column').last().data('column') + 1;
+    if($('.container-fluid .rows .row_' + row + ' .column').length > 0){
+        column = $('.container-fluid .rows .row_' + row + ' .column').last().data('column') + 1;
     }
 
     var data = [{"column": column, "row": row, "text": text}];
     var template = $.templates("#show_block_template");
     var htmlOutput = template.render(data);
-    $('.container-fluid .row_' + row).append(htmlOutput);
+    $('.container-fluid .rows .row_' + row).append(htmlOutput);
 
     resizeColumns(row);
 
@@ -101,7 +101,7 @@ function createColumn(row, text = ''){
  */
  function resizeColumns(row)
  {
-     var col = 12 / $('.container-fluid .row_' + row + ' .column').length;
-     $('.container-fluid .row_' + row + ' .column').removeClass('col-12 col-6 col-4 col-3');
-     $('.container-fluid .row_' + row + ' .column').addClass('col-' + col);
+     var col = 12 / $('.container-fluid .rows .row_' + row + ' .column').length;
+     $('.container-fluid .rows .row_' + row + ' .column').removeClass('col-12 col-6 col-4 col-3');
+     $('.container-fluid .rows .row_' + row + ' .column').addClass('col-' + col);
  }

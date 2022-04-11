@@ -3,7 +3,7 @@
  * @Author: Albert
  * @Date:   2022-03-25 13:27:45
  * @Last Modified by:   Your name
- * @Last Modified time: 2022-04-06 02:14:07
+ * @Last Modified time: 2022-04-09 03:40:58
  */
 
 
@@ -25,37 +25,37 @@ class gw2 {
     	$result = null;
         $mysqli  = mysqli_connect(HOST_DB, USER_DB, PASSWORD_DB, DATABASE_DB);
         if (!$mysqli ) {
-            die('No pudo conectarse: ' . mysql_error());
-        }
-
-        $stmt = $mysqli->prepare($query);
-        if(sizeof($params) > 0){
-    	    $stmt->bind_param($types, ...$params);
-        }
-        $stmt->execute();
-
-        if (strpos($query, 'SELECT') !== false) {
-            $rows = $stmt->get_result();
-            if($rows->num_rows == 0){
-                $result = array();
-            }elseif($rows->num_rows == 1){
-                $result = $rows->fetch_assoc();
-            }elseif($rows->num_rows > 1){
-                $result = array();
-                while ($row = $rows->fetch_array())
-                {
-                    array_push($result, $row);
-                }
+            $result = false;
+        }else{
+            $stmt = $mysqli->prepare($query);
+            if(sizeof($params) > 0){
+                $stmt->bind_param($types, ...$params);
             }
-        }else if(strpos($query, 'INSERT') !== false){
-            $result = $stmt->insert_id;
-        }else if(strpos($query, 'UPDATE') !== false){
-            $result = $stmt->id;
-        }else if(strpos($query, 'DELETE') !== false){
-            $result = true;
+            $stmt->execute();
+            if (strpos($query, 'SELECT') !== false) {
+                $rows = $stmt->get_result();
+                if($rows->num_rows == 0){
+                    $result = array();
+                }elseif($rows->num_rows == 1){
+                    $result = $rows->fetch_assoc();
+                }elseif($rows->num_rows > 1){
+                    $result = array();
+                    while ($row = $rows->fetch_array())
+                    {
+                        array_push($result, $row);
+                    }
+                }
+            }else if(strpos($query, 'INSERT') !== false){
+                $result = $stmt->insert_id;
+            }else if(strpos($query, 'UPDATE') !== false){
+                $result = $stmt->id;
+            }else if(strpos($query, 'DELETE') !== false){
+                $result = true;
+            }else if(strpos($query, 'REPLACE') !== false){
+                $result = true;
+            }
+            $mysqli->close();
         }
-
-    	$mysqli->close();
     	return $result;
     }
     

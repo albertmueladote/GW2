@@ -3,7 +3,7 @@
  * @Author: Albert
  * @Date:   2022-03-26 05:48:53
  * @Last Modified by:   Your name
- * @Last Modified time: 2022-04-04 03:07:56
+ * @Last Modified time: 2022-04-11 11:08:28
  */
 
 require_once('gw2.class.php');
@@ -112,7 +112,7 @@ class guild extends gw2{
         $params = array($this->api);
         $guild = $this->query($query, $types, $params);
 
-        if(!is_null($guild))
+        if(sizeof($guild) > 0)
         {
             $this->id = $guild['id'];
             $this->name = $guild['name'];

@@ -2,12 +2,26 @@
  * @Author: Albert
  * @Date:   2022-04-05 16:45:12
  * @Last Modified by:   Your name
- * @Last Modified time: 2022-04-05 16:49:52
+ * @Last Modified time: 2022-04-11 11:42:13
  */
-.row{
-    border: 1px solid black;
+
+ @font-face {font-family: "Cronos Pro"; src: url("//db.onlinewebfonts.com/t/a059538dbb553b4978607a6366a9653b.eot"); src: url("//db.onlinewebfonts.com/t/a059538dbb553b4978607a6366a9653b.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/a059538dbb553b4978607a6366a9653b.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/a059538dbb553b4978607a6366a9653b.woff") format("woff"), url("//db.onlinewebfonts.com/t/a059538dbb553b4978607a6366a9653b.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/a059538dbb553b4978607a6366a9653b.svg#Cronos Pro") format("svg"); }
+ 
+ body{
+    background-color: #f1f3f4;
+    font-family: Cronos Pro,Arial,Helvetica,sans-serif;
 }
 
-.column{
-    border: 1px solid black;
+.container-fluid{
+   box-shadow: 5px 5px 5px 5px #888888;
+}
+
+.row{
+    margin-bottom: 32px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.row_1{
+    margin-top: 169px;
 }
