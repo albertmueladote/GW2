@@ -2,7 +2,7 @@
  * @Author: Your name
  * @Date:   2022-04-03 03:03:53
  * @Last Modified by:   Your name
- * @Last Modified time: 2022-04-11 19:41:11
+ * @Last Modified time: 2022-04-19 18:06:50
  */
 
  @font-face {font-family: "Cronos Pro"; src: url("//db.onlinewebfonts.com/t/a059538dbb553b4978607a6366a9653b.eot"); src: url("//db.onlinewebfonts.com/t/a059538dbb553b4978607a6366a9653b.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/a059538dbb553b4978607a6366a9653b.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/a059538dbb553b4978607a6366a9653b.woff") format("woff"), url("//db.onlinewebfonts.com/t/a059538dbb553b4978607a6366a9653b.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/a059538dbb553b4978607a6366a9653b.svg#Cronos Pro") format("svg"); }
@@ -15,8 +15,8 @@
     box-shadow: 5px 5px 5px 5px #888888;
  }
 
- .column.{
-     top: -32px;
+ .cke_contents{
+    cursor: pointer!important;
  }
  
  button{
@@ -32,17 +32,33 @@
     cursor: pointer;
  }
 
- .cke_top{
-     display: none!important;
+ 
+ .image_preview{
+     max-width: 100%;
+     max-height: 200px;
  }
 
- .cke_chrome{
-     border: none!important;
+ .image_preview_left{
+    text-align: left;
+}
+
+ .image_preview_center{
+     text-align: center;
  }
 
- .cke_bottom{
-     display: none!important;
- }
+ .image_preview_right{
+    text-align: right;
+}
+
+.image_preview_expand_h img{
+    width: 100%;
+    max-width: none;
+}
+
+.image_preview_expand_v img{
+    height: 100%;
+    max-height: none;
+}
 
  .cke_button__removecolumn{
     font-weight: 500!important;
@@ -54,7 +70,7 @@
     margin-left: 3px!important;
 }
 
- select{
+select{
     font-weight: 500;
     background: rgb(170, 4, 4);
     color: rgb(255, 255, 255)!important;
