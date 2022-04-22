@@ -2,7 +2,7 @@
  * @Author: Albert
  * @Date:   2022-04-05 16:45:12
  * @Last Modified by:   Your name
- * @Last Modified time: 2022-04-11 11:42:13
+ * @Last Modified time: 2022-04-21 17:50:29
  */
 
  @font-face {font-family: "Cronos Pro"; src: url("//db.onlinewebfonts.com/t/a059538dbb553b4978607a6366a9653b.eot"); src: url("//db.onlinewebfonts.com/t/a059538dbb553b4978607a6366a9653b.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/a059538dbb553b4978607a6366a9653b.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/a059538dbb553b4978607a6366a9653b.woff") format("woff"), url("//db.onlinewebfonts.com/t/a059538dbb553b4978607a6366a9653b.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/a059538dbb553b4978607a6366a9653b.svg#Cronos Pro") format("svg"); }
@@ -24,4 +24,36 @@
 
 .row_1{
     margin-top: 169px;
+}
+
+img{
+    max-width: 100%;
+    max-height: 200px;
+}
+
+.image_preview{
+    max-width: 100%;
+    max-height: 200px;
+}
+
+.image_preview_left{
+   text-align: left;
+}
+
+.image_preview_center{
+    text-align: center;
+}
+
+.image_preview_right{
+   text-align: right;
+}
+
+.image_preview_expand_h img{
+   width: 100%;
+   max-width: none;
+}
+
+.image_preview_expand_v img{
+   height: 100%;
+   max-height: none;
 }

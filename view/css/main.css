@@ -2,7 +2,7 @@
  * @Author: Albert
  * @Date:   2022-04-10 19:21:40
  * @Last Modified by:   Your name
- * @Last Modified time: 2022-04-12 13:32:59
+ * @Last Modified time: 2022-04-19 20:56:00
  */
 
 
@@ -21,4 +21,5 @@ body{
     margin: auto;
     min-height: 100%;
     background-color: #fff;
+    box-shadow: 5px 5px 5px 5px #888888;
 }

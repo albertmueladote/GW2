@@ -2,7 +2,7 @@
  * @Author: Albert
  * @Date:   2022-04-05 16:43:29
  * @Last Modified by:   Your name
- * @Last Modified time: 2022-04-11 04:05:22
+ * @Last Modified time: 2022-04-21 18:01:23
  */
 
  load();
@@ -17,37 +17,12 @@
 	    success : function(data) {
 	       	if(JSON.parse(JSON.stringify(data)).result){
                 var array = JSON.parse(JSON.stringify(data)).result;
-                var last_row = 0;
                 $.each(array, function( row_id, blocks ) {
-                    if(last_row < row_id){
-                        last_row = row_id;
-                    }
+                    var row = createRow();
+                    $.each(blocks, function( block_id, block ) {
+                        createColumn(row, block.text, block.src, block.extra);
+                    });
                 });
-                if(last_row > 0){
-                    for(var x = 1; x <= last_row; x++){
-                        createRow();
-                        if(x in array){
-                            var last_block = 0
-                            $.each(array[x], function( block_id, block ) {
-                                if(last_block < block_id){
-                                    last_block = block_id;
-                                }
-                            });
-                            for(var y = 1; y <= last_block; y++){
-                                if(y in array[x]){
-                                    if(array[x][y].type == 'text'){
-                                        createColumn(x,array[x][y].value);
-                                    }
-                                }else{
-                                    createColumn(x);
-                                }
-                                
-                            }
-                        }else{
-                            createColumn(x);
-                        }
-                    }
-                }
 	       	}else{
 	       		return false;
 	       	}
@@ -69,10 +44,10 @@
         row = $('.container-fluid .rows .row').last().data('row') + 1;
     }
 
-    var data = [{"row": row}];
-    var template = $.templates("#show_row_template");
+    var data = [{'row': row}];
+    var template = $.templates('#show_row_template');
     var htmlOutput = template.render(data);
-    $(".container-fluid .rows").append(htmlOutput);
+    $('.container-fluid .rows').append(htmlOutput);
 
     return row;
 }
@@ -80,17 +55,21 @@
 /**
  * @param  {int} row
  */
-function createColumn(row, text = ''){
+function createColumn(row, text = '', src = '', extra = ''){
     var column = 1;
     if($('.container-fluid .rows .row_' + row + ' .column').length > 0){
         column = $('.container-fluid .rows .row_' + row + ' .column').last().data('column') + 1;
     }
-
-    var data = [{"column": column, "row": row, "text": text}];
-    var template = $.templates("#show_block_template");
+    
+    if(text != '' && src == ''){
+        var data = [{'column': column, 'text': text}];
+        var template = $.templates('#show_text_block_template');
+    }else if(text == '' && src != ''){
+        var data = [{'column': column, 'src': src, 'extra': extra}];
+        var template = $.templates('#show_image_block_template');
+    }
     var htmlOutput = template.render(data);
     $('.container-fluid .rows .row_' + row).append(htmlOutput);
-
     resizeColumns(row);
 
     return column;

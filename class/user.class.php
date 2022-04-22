@@ -3,7 +3,7 @@
  * @Author: Albert
  * @Date:   2022-03-25 12:47:23
  * @Last Modified by:   Your name
- * @Last Modified time: 2022-04-11 11:07:56
+ * @Last Modified time: 2022-04-21 13:43:08
  */
 
 require_once('gw2.class.php');
@@ -42,7 +42,7 @@ class user extends gw2{
      */
     public function loadByApi()
     {
-        $query = 'SELECT * FROM user WHERE api = ?';
+        $query = 'SELECT user.* FROM user WHERE user.api = ?';
         $types = "s";
         $params = array($this->api);
         $user = $this->query($query, $types, $params);
@@ -63,7 +63,7 @@ class user extends gw2{
 
     public function loadByName()
     {
-        $query = 'SELECT * FROM user WHERE name = ?';
+        $query = 'SELECT user.* FROM user WHERE user.name = ?';
         $types = "s";
         $params = array($this->name);
         $user = $this->query($query, $types, $params);
@@ -89,7 +89,7 @@ class user extends gw2{
      */
     public function login()
     {
-        $query = 'SELECT * FROM user WHERE name = ? AND password = ?';
+        $query = 'SELECT user.* FROM user WHERE user.name = ? AND user.password = ?';
         $types = "ss";
         $params = array($this->name, $this->password);
         $user = $this->query($query, $types, $params);
@@ -121,11 +121,11 @@ class user extends gw2{
      */
     public function load()
     {
-        $query = 'SELECT * FROM user WHERE id = ?';
+        $query = 'SELECT user.* FROM user WHERE user.id = ?';
         $types = "i";
         $params = array($this->id);
         $user = $this->query($query, $types, $params);
-        if(!is_null($user))
+        if(sizeof($user) > 0)
         {
             $this->id = $user['id'];
             $this->name = $user['name'];
@@ -148,7 +148,7 @@ class user extends gw2{
     public function save()
     {
         if(!$this->loadByName()){
-            $query = 'INSERT INTO user (name, api, password, last_login, modifed, created) VALUES (?, ?, ?, ?, ?, ?)';
+            $query = 'INSERT INTO user (user.name, user.api, user.password, user.last_login, user.modifed, user.created) VALUES (?, ?, ?, ?, ?, ?)';
             $types = "ssssss";
             $params = array();
             
@@ -185,7 +185,7 @@ class user extends gw2{
      */
     public function update()
     {
-        $query = 'UPDATE user SET name = ?, api= ?, password = ?, last_login = ?, modifed = ?, created = ? WHERE id = ?';
+        $query = 'UPDATE user SET user.name = ?, user.api= ?, user.password = ?, user.last_login = ?, user.modifed = ?, user.created = ? WHERE user.id = ?';
         $types = "sssssi";
         $params = array();
         array_push($params, $this->name);
@@ -213,7 +213,7 @@ class user extends gw2{
      */
     public function remove()
     {
-        $query = 'DELETE FROM user WHERE id = ?';
+        $query = 'DELETE FROM user WHERE user.id = ?';
         $types = "i";
         $params = array();
         array_push($params, $this->id);

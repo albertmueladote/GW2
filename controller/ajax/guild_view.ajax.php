@@ -3,7 +3,7 @@
  * @Author: Albert
  * @Date:   2022-04-04 19:54:59
  * @Last Modified by:   Your name
- * @Last Modified time: 2022-04-10 18:52:52
+ * @Last Modified time: 2022-04-20 10:39:52
  */
 
 require_once('../../conf/conf.php');
@@ -15,7 +15,12 @@ if(!is_null($current_user_guilds->user)){
     $blocks = array();
     foreach($guild_blocks->blocks AS $block){
         $blocks[$block->row][$block->column]['type'] = $block->type;
-        $blocks[$block->row][$block->column]['value'] = $block->value;
+        if(strcmp($block->type, 'text') == 0){
+            $blocks[$block->row][$block->column]['text'] = $block->value;
+        }else if(strcmp($block->type, 'image') == 0){
+            $blocks[$block->row][$block->column]['src'] = MEDIA . 'guilds/' . $gw2->cleanString($_SESSION['current_guild']) . '/' . $block->value;
+        }
+        $blocks[$block->row][$block->column]['extra'] = $block->extra;
     }
     $result = array('result' => $blocks);
 }else{

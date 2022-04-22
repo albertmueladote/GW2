@@ -1,0 +1,14 @@
+/**
+ * @Author: Albert
+ * @Date:   2022-04-05 18:12:52
+ * @Last Modified by:   Your name
+ * @Last Modified time: 2022-04-19 20:48:16
+ */
+ 
+tr{
+    cursor: pointer;
+}
+
+tr:hover td{
+    background-color: #F6F6F6;
+}

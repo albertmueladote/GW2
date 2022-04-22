@@ -3,7 +3,7 @@
  * @Author: Albert
  * @Date:   2022-04-01 13:26:22
  * @Last Modified by:   Your name
- * @Last Modified time: 2022-04-03 02:12:12
+ * @Last Modified time: 2022-04-21 13:44:51
  */
 
 require_once('gw2.class.php');
@@ -42,7 +42,7 @@ class user_guilds extends gw2{
         $types = "i";
         $params = array($this->user);
         $guilds = $this->query($query, $types, $params);
-        if(!is_null($guilds)){
+        if(sizeof($guilds) > 0){
             $member_guilds = array();
             $leader_guilds = array();
 

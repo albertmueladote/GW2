@@ -3,7 +3,7 @@
  * @Author: Albert
  * @Date:   2022-03-29 11:59:39
  * @Last Modified by:   Your name
- * @Last Modified time: 2022-04-11 11:03:28
+ * @Last Modified time: 2022-04-21 13:45:42
  */
 
 require_once('gw2.class.php');
@@ -62,11 +62,11 @@ class user_guild extends gw2{
      */
     public function load()
     {
-        $query = 'SELECT * FROM user_guild WHERE id = ?';
+        $query = 'SELECT user_guild.* FROM user_guild WHERE user_guild.id = ?';
         $types = "i";
         $params = array($this->id);
         $user = $this->query($query, $types, $params);
-        if(!is_null($user))
+        if(sizeof($user) > 0)
         {
             $this->id = $user['id'];
             $this->name = $user['user'];
@@ -83,7 +83,7 @@ class user_guild extends gw2{
      */
     public function save()
     {
-        $query = 'INSERT INTO user_guild (user, guild, leader, created) VALUES (?, ?, ?, ?)';
+        $query = 'INSERT INTO user_guild (user_guild.user, user_guild.guild, user_guild.leader, user_guild.created) VALUES (?, ?, ?, ?)';
         $types = "iiis";
         $params = array();
         array_push($params, $this->user);
@@ -107,7 +107,7 @@ class user_guild extends gw2{
      */
     public function update()
     {
-        $query = 'UPDATE user_guild SET user = ?, guild= ?, leader = ?, created = ? WHERE id = ?';
+        $query = 'UPDATE user_guild SET user_guild.user = ?, user_guild.guild= ?, user_guild.leader = ?, user_guild.created = ? WHERE user_guild.id = ?';
         $types = "iiisi";
         $params = array();
         array_push($params, $this->user);
@@ -132,7 +132,7 @@ class user_guild extends gw2{
      */
     public function remove()
     {
-        $query = 'DELETE FROM user_guild WHERE id = ?';
+        $query = 'DELETE FROM user_guild WHERE user_guild.id = ?';
         $types = "i";
         $params = array();
         array_push($params, $this->id);

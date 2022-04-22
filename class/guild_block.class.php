@@ -3,7 +3,7 @@
  * @Author: Your name
  * @Date:   2022-04-03 21:50:57
  * @Last Modified by:   Your name
- * @Last Modified time: 2022-04-04 03:39:09
+ * @Last Modified time: 2022-04-21 15:49:14
  */
 
 require_once('gw2.class.php');
@@ -17,6 +17,7 @@ class guild_block extends gw2{
     private $guild;
     private $type;
     private $value;
+    private $extra;
     private $row;
     private $column;
     private $modifed;
@@ -34,6 +35,28 @@ class guild_block extends gw2{
             $this->load();
         }
     }
+
+    public function loadByGuildRowColumn()
+    {
+        $query = 'SELECT * FROM guild_block WHERE guild_block.guild = ? AND guild_block.row = ? AND guild_block.column = ?';
+        $types = "iii";
+        $params = array($this->guild, $this->row, $this->column);
+        $guild_block = $this->query($query, $types, $params);
+        if(sizeof($guild_block) > 0)
+        {
+            $this->id = $guild_block['id'];
+            $this->guild = $guild_block['guild'];
+            $this->type = $guild_block['type'];
+            $this->value = $guild_block['value'];
+            $this->extra = $guild_block['extra'];
+            $this->row = $guild_block['row'];
+            $this->column = $guild_block['column'];
+            $this->modifed = $guild_block['modifed'];
+            $this->created = $guild_block['created'];
+            return true;
+        }
+        return false;
+    }
     
     /**
      * load
@@ -42,16 +65,17 @@ class guild_block extends gw2{
      */
     public function load()
     {
-        $query = 'SELECT * FROM guild_block WHERE id = ?';
+        $query = 'SELECT * FROM guild_block WHERE guild_block.id = ?';
         $types = "i";
         $params = array($this->id);
         $guild_block = $this->query($query, $types, $params);
-        if(!is_null($guild_block))
+        if(sizeof($guild_block) > 0)
         {
             $this->id = $guild_block['id'];
             $this->guild = $guild_block['guild'];
             $this->type = $guild_block['type'];
             $this->value = $guild_block['value'];
+            $this->extra = $guild_block['extra'];
             $this->row = $guild_block['row'];
             $this->column = $guild_block['column'];
             $this->modifed = $guild_block['modifed'];
@@ -66,12 +90,13 @@ class guild_block extends gw2{
      */
     public function save()
     {
-        $query = 'INSERT INTO guild (guild, type, value, row, column, modifed, created) VALUES (?, ?, ?, ?, ?, ?, ?)';
-        $types = "sssiiss";
+        $query = 'INSERT INTO guild_block (guild_block.guild, guild_block.type, guild_block.value, guild_block.extra, guild_block.row, guild_block.column, guild_block.modifed, guild_block.created) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+        $types = "isssiiss";
         $params = array();        
         array_push($params, $this->guild);
         array_push($params, $this->type);
         array_push($params, $this->value);
+        array_push($params, $this->extra);
         array_push($params, $this->row);
         array_push($params, $this->column);
         array_push($params, date('y-m-d H:i:s'));
@@ -93,15 +118,17 @@ class guild_block extends gw2{
      */
     public function update()
     {
-        $query = 'UPDATE guild_block SET guild = ?, type= ?, value = ?, row = ?, column = ?, modifed = ? WHERE id = ?';
-        $types = "sssiis";
+        $query = 'UPDATE guild_block SET guild_block.guild = ?, guild_block.type= ?, guild_block.value = ?, guild_block.extra = ?, guild_block.row = ?, guild_block.column = ?, guild_block.modifed = ? WHERE guild_block.id = ?';
+        $types = "isssiisi";
         $params = array();
         array_push($params, $this->guild);
         array_push($params, $this->type);
         array_push($params, $this->value);
+        array_push($params, $this->extra);
         array_push($params, $this->row);
         array_push($params, $this->column);
         array_push($params, date('y-m-d H:i:s'));
+        array_push($params, $this->id);
 
         $id = $this->query($query, $types, $params);
 
@@ -119,7 +146,7 @@ class guild_block extends gw2{
      */
     public function remove()
     {
-        $query = 'DELETE FROM guild_block WHERE id = ?';
+        $query = 'DELETE FROM guild_block WHERE guild_block.id = ?';
         $types = "i";
         $params = array();
         array_push($params, $this->id);
@@ -132,6 +159,7 @@ class guild_block extends gw2{
             $this->guild = null;
             $this->type = null;
             $this->value = null;
+            $this->extra = null;
             $this->row = null;
             $this->column = null;
             $this->modifed = null;

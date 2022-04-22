@@ -2,7 +2,7 @@
  * @Author: Albert
  * @Date:   2022-04-02 23:13:32
  * @Last Modified by:   Your name
- * @Last Modified time: 2022-04-19 18:06:03
+ * @Last Modified time: 2022-04-21 17:30:21
  */
 
 $('#add_row').click(function(){
@@ -10,6 +10,9 @@ $('#add_row').click(function(){
 });
 
 load();
+
+var last_row = 0;
+var last_column = 0;
 
 function load()
 {
@@ -21,37 +24,12 @@ function load()
 	    success : function(data) {
 	       	if(JSON.parse(JSON.stringify(data)).result){
                 var array = JSON.parse(JSON.stringify(data)).result;
-                var last_row = 0;
                 $.each(array, function( row_id, blocks ) {
-                    if(last_row < row_id){
-                        last_row = row_id;
-                    }
+                    var row = createRow();
+                    $.each(blocks, function( block_id, block ) {
+                        createColumn(row, block.text, block.src, block.extra);
+                    });
                 });
-                if(last_row > 0){
-                    for(var x = 1; x <= last_row; x++){
-                        createRow();
-                        if(x in array){
-                            var last_block = 0
-                            $.each(array[x], function( block_id, block ) {
-                                if(last_block < block_id){
-                                    last_block = block_id;
-                                }
-                            });
-                            for(var y = 1; y <= last_block; y++){
-                                if(y in array[x]){
-                                    if(array[x][y].type == 'text'){
-                                        createColumn(x,array[x][y].value);
-                                    }
-                                }else{
-                                    createColumn(x);
-                                }
-                                
-                            }
-                        }else{
-                            createColumn(x);
-                        }
-                    }
-                }
 	       	}else{
 	       		return false;
 	       	}
@@ -95,35 +73,26 @@ function createRow(){
 /**
  * @param  {int} row
  */
-function createColumn(row, text = ''){
+function createColumn(row, text = '', src = '', extra = ''){
     var column = 1;
     if($('.container-fluid .rows .row_' + row + ' .column').length > 0){
         column = $('.container-fluid .rows .row_' + row + ' .column').last().data('column') + 1;
     }
 
-    var data = [{"column": column, "row": row, "text": text}];
+    if(text != '' && src == ''){
+        var selected_text = true;
+        var selected_image = false;
+    }else if(text == '' && src != ''){
+        var selected_text = false;
+        var selected_image = true;
+    }
+    
+    var data = [{"column": column, "row": row, "text": text, "src": src, "extra": extra, "selected_image": selected_image, "selected_text": selected_text}];
     var template = $.templates("#edit_block_template");
     var htmlOutput = template.render(data);
     $('.container-fluid .rows .row_' + row).append(htmlOutput);
 
     resizeColumns(row);
-    
-    /*var editor = CKEDITOR.replace('textarea_' + row + '_' + column, {
-            toolbar: [
-            { name: 'document', groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates' ] },
-            { name: 'clipboard', groups: [ 'clipboard', 'undo' ], items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },
-            { name: 'editing', groups: [ 'find', 'selection', 'spellchecker' ], items: [ 'Find', 'Replace', '-', 'SelectAll', '-', 'Scayt' ] },
-            { name: 'forms', items: [ 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField' ] },
-            '/',
-            { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat' ] },
-            { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl', 'Language' ] },
-            { name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ] },
-            { name: 'insert', items: [ 'Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe' ] },
-            '/',
-            { name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },
-            { name: 'colors', items: [ 'TextColor', 'BGColor' ] }
-        ]
-    });*/ 
     
     CKEDITOR.replace('textarea_' + row + '_' + column, {
         toolbar: [
@@ -140,13 +109,22 @@ function createColumn(row, text = ''){
         })
         hiddeAll();
         editor.on('focus', function(){
+            saveColumn(last_row, last_column);
+            last_row = row;
+            last_column = column;
             showColumn(row, column);
         })
         $('.image_preview_' + row + '_' + column).on('click', function(){
+            saveColumn(last_row, last_column);
+            last_row = row;
+            last_column = column;
             showColumn(row, column);
         })
         editor.on('blur', function(){
             if ($('.container-fluid .rows .row_' + row + ' .column_' + column + ' .column_panel .column_content').is(":focus")) {
+                saveColumn(last_row, last_column);
+                last_row = row;
+                last_column = column;
                 showColumn(row, column);
             }
         })
@@ -163,17 +141,16 @@ function createColumn(row, text = ''){
         }
     })
 
-    $('.container-fluid .rows .row_' + row + ' .column_' + column + ' .image_content').hide();
-    $('.container-fluid .rows .row_' + row + ' .column_' + column + ' .textarea_content').show();
-
+    if(text != '' && src == ''){
+        showContent(row, column, 'text');
+    }else if(text == '' && src != ''){
+        showContent(row, column, 'image');
+    }else{
+        showContent(row, column, 'text');
+    }
+    
     $('.container-fluid .rows .row_' + row + ' .column_' + column + ' .column_panel .column_content').change(function(){
-        if($(this).val() == 'text'){
-            $('.container-fluid .rows .row_' + row + ' .column_' + column + ' .image_content').hide();
-            $('.container-fluid .rows .row_' + row + ' .column_' + column + ' .textarea_content').show();
-        }else if($(this).val() == 'image'){
-            $('.container-fluid .rows .row_' + row + ' .column_' + column + ' .image_content').show();
-            $('.container-fluid .rows .row_' + row + ' .column_' + column + ' .textarea_content').hide();
-        }
+        showContent(row, column, $(this).val());
     })
 
     $('.container-fluid .rows .row_' + row + ' .column_' + column + ' .image_content .image_left').click(function(){
@@ -250,6 +227,21 @@ function previewImage(row, column){
     }
 }
 
+function showContent(row, column, content)
+{
+    $('.container-fluid .rows .row_' + row + ' .column_' + column + ' .image_content').hide();
+    $('.container-fluid .rows .row_' + row + ' .column_' + column + ' .image_content').attr('data-enabled', null);
+    $('.container-fluid .rows .row_' + row + ' .column_' + column + ' .textarea_content').hide();
+    $('.container-fluid .rows .row_' + row + ' .column_' + column + ' .textarea_content').attr('data-enabled', null);
+    if(content == 'text'){
+        $('.container-fluid .rows .row_' + row + ' .column_' + column + ' .textarea_content').show();
+        $('.container-fluid .rows .row_' + row + ' .column_' + column + ' .textarea_content').attr('data-enabled', true);
+    }else if(content == 'image'){
+        $('.container-fluid .rows .row_' + row + ' .column_' + column + ' .image_content').show();
+        $('.container-fluid .rows .row_' + row + ' .column_' + column + ' .image_content').attr('data-enabled', true);
+    }
+}
+
 /**
  * @param  {int} row
  */
@@ -263,6 +255,7 @@ function removeRow(row){
  */
 function removeColumn(row, column){
     $('.container-fluid .rows .row_' + row + ' .column_' + column).remove();
+    saveColumn(row, column, true);
     resizeColumns(row);
 }
 
@@ -274,4 +267,50 @@ function resizeColumns(row)
     var col = 12 / $('.container-fluid .rows .row_' + row + ' .column').length;
     $('.container-fluid .rows .row_' + row + ' .column').removeClass('col-12 col-6 col-4 col-3');
     $('.container-fluid .rows .row_' + row + ' .column').addClass('col-' + col);
+}
+
+function saveColumn(row, column, remove = false){
+    if(row > 0 && column > 0){
+        if(remove){
+            var data = {"row": row, "column": column, "remove": remove}
+            last_row = 0;
+            last_column = 0;
+        }else{
+            var type = $('.container-fluid .rows .row_' + row + ' .column_' + column + ' .column_content').val();
+            if(type == 'image'){
+                var value = $('.container-fluid .rows .row_' + row + ' .column_' + column + ' .image_preview').attr('src').split("/");
+                value = value[value.length - 1];
+                var extra = $('.container-fluid .rows .row_' + row + ' .column_' + column + ' .image_preview_content').attr('class').split(/\s+/);
+                extra = jQuery.grep(extra, function(value) {
+                    return value != 'image_preview_content';
+                });
+                extra = extra.join(" ");
+            }else if(type == 'text'){
+                var value = CKEDITOR.instances['textarea_' + row + '_' + column].getData();
+                var extra = '';
+            }
+            var data = {"type": type, "value": value, "extra": extra, "row": row, "column": column};
+        }
+
+        $.ajax({
+            url : '../controller/ajax/block_save.ajax.php',
+            data : data,
+            type : 'POST',
+            dataType : 'json',
+            success : function(data) {
+                console.log(JSON.parse(JSON.stringify(data)).result);
+                if(JSON.parse(JSON.stringify(data)).result){
+                    
+                }else{
+                    
+                }
+            },
+            error : function(xhr, status) {
+                
+            },
+            complete : function(xhr, status) {
+                
+            }
+        });
+    }
 }

@@ -3,7 +3,7 @@
  * @Author: Albert
  * @Date:   2022-04-06 12:37:55
  * @Last Modified by:   Your name
- * @Last Modified time: 2022-04-10 04:11:28
+ * @Last Modified time: 2022-04-21 13:46:09
  */
 
  require_once(_CLASS . 'gw2.class.php');
@@ -30,7 +30,7 @@ class session extends gw2{
      */
     public function load()
     {
-        $query = 'SELECT * FROM session WHERE id = ?';
+        $query = 'SELECT session.* FROM session WHERE session.id = ?';
         $types = "s";
         $params = array($this->id);
         $session = $this->query($query, $types, $params);
@@ -51,7 +51,7 @@ class session extends gw2{
     {
         $session = new session($this->id);
     
-        $query = 'REPLACE INTO session (id, access, data) VALUES (?, ?, ?)';
+        $query = 'REPLACE INTO session (session.id, session.access, session.data) VALUES (?, ?, ?)';
         $types = "sss";
         $params = array();
         
@@ -74,7 +74,7 @@ class session extends gw2{
      */
     public function remove()
     {
-        $query = 'DELETE FROM session WHERE id = ?';
+        $query = 'DELETE FROM session WHERE session.id = ?';
         $types = "s";
         $params = array();
         array_push($params, $this->id);

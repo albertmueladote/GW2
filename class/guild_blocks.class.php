@@ -3,7 +3,7 @@
  * @Author: Your name
  * @Date:   2022-04-03 21:50:57
  * @Last Modified by:   Your name
- * @Last Modified time: 2022-04-05 18:28:14
+ * @Last Modified time: 2022-04-21 13:41:49
  */
 
 require_once('gw2.class.php');
@@ -24,7 +24,7 @@ class guild_blocks extends gw2{
      */
     public function loadBlocksByGuildId($guild)
     {   
-        $query = 'SELECT id FROM guild_block WHERE guild = ? ORDER BY row ASC, guild_block.column ASC';
+        $query = 'SELECT guild_block.id FROM guild_block WHERE guild_block.guild = ? ORDER BY guild_block.row ASC, guild_block.column ASC';
         $types = "i";
         $params = array($guild);
         $guild_blocks = $this->query($query, $types, $params);
@@ -57,6 +57,7 @@ class guild_blocks extends gw2{
             $guild_block->guild = $block['guild'];
             $guild_block->type = $block['type'];
             $guild_block->value = $block['value'];
+            $guild_block->extra = $block['extra'];
             $guild_block->row = $block['row'];
             $guild_block->column = $block['column'];
             $guild_block->modifed = $block['modifed'];

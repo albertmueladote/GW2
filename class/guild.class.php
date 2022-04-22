@@ -3,7 +3,7 @@
  * @Author: Albert
  * @Date:   2022-03-26 05:48:53
  * @Last Modified by:   Your name
- * @Last Modified time: 2022-04-11 11:08:28
+ * @Last Modified time: 2022-04-21 13:44:12
  */
 
 require_once('gw2.class.php');
@@ -82,13 +82,12 @@ class guild extends gw2{
 
     public function loadByName()
     {
-        $query = 'SELECT * FROM guild WHERE name = ?';
-
+        $query = 'SELECT guild.* FROM guild WHERE guild.name = ?';
         $types = "s";
         $params = array($this->name);
         $guild = $this->query($query, $types, $params);
-
-        if(!is_null($guild))
+    
+        if(sizeof($guild) > 0)
         {
             $this->id = $guild['id'];
             $this->name = $guild['name'];
@@ -106,7 +105,7 @@ class guild extends gw2{
     public function loadByApi()
     {
         
-        $query = 'SELECT * FROM guild WHERE api = ?';
+        $query = 'SELECT guild.* FROM guild WHERE guild.api = ?';
 
         $types = "s";
         $params = array($this->api);
@@ -129,11 +128,11 @@ class guild extends gw2{
      */
     public function load()
     {
-        $query = 'SELECT * FROM guild WHERE id = ?';
+        $query = 'SELECT guild.* FROM guild WHERE guild.id = ?';
         $types = "i";
         $params = array($this->id);
         $guild = $this->query($query, $types, $params);
-        if(!is_null($guild))
+        if(sizeof($guild) > 0)
         {
             $this->id = $guild['id'];
             $this->name = $guild['name'];
@@ -150,7 +149,7 @@ class guild extends gw2{
      */
     public function save()
     {
-        $query = 'INSERT INTO guild (name, api, modifed, created) VALUES (?, ?, ?, ?)';
+        $query = 'INSERT INTO guild (guild.ame, guild.api, guild.modifed, guild.created) VALUES (?, ?, ?, ?)';
         $types = "ssss";
         $params = array();
 
@@ -181,7 +180,7 @@ class guild extends gw2{
      */
     public function update()
     {
-        $query = 'UPDATE guild SET name = ?, api= ?, modifed = ?, created = ? WHERE id = ?';
+        $query = 'UPDATE guild SET guild.name = ?, guild.api= ?, guild.modifed = ?, guild.created = ? WHERE guild.id = ?';
         $types = "ssssi";
         $params = array();
         array_push($params, $this->name);
@@ -206,7 +205,7 @@ class guild extends gw2{
      */
     public function remove()
     {
-        $query = 'DELETE FROM guild WHERE id = ?';
+        $query = 'DELETE FROM guild WHERE guild.id = ?';
         $types = "i";
         $params = array();
         array_push($params, $this->id);

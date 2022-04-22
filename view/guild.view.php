@@ -3,11 +3,11 @@
  * @Author: Albert
  * @Date:   2022-04-01 18:26:51
  * @Last Modified by:   Your name
- * @Last Modified time: 2022-04-11 04:03:17
+ * @Last Modified time: 2022-04-20 09:19:13
  */
 ?>
 <!DOCTYPE html>
-<html>
+<html> 
   <?php require(BLOCKS . 'head.php'); ?>
   <link rel="stylesheet" href="<?php echo CSS . 'guild.css'?>">
   <?php if($is_leader){ ?>
@@ -16,8 +16,8 @@
   <?php }else{ ?>
     <link rel="stylesheet" href="<?php echo CSS . 'show_guild.css'?>">
   <?php } ?>
-  <?php require(BLOCKS . 'topmenu.php'); ?>
   <body>
+    <?php require(BLOCKS . 'topmenu.php'); ?>
     <div class="container-fluid">
       <div class="rows">
       </div>

@@ -2,7 +2,7 @@
  * @Author: Your name
  * @Date:   2022-04-03 03:03:53
  * @Last Modified by:   Your name
- * @Last Modified time: 2022-04-19 18:06:50
+ * @Last Modified time: 2022-04-21 17:26:47
  */
 
  @font-face {font-family: "Cronos Pro"; src: url("//db.onlinewebfonts.com/t/a059538dbb553b4978607a6366a9653b.eot"); src: url("//db.onlinewebfonts.com/t/a059538dbb553b4978607a6366a9653b.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/a059538dbb553b4978607a6366a9653b.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/a059538dbb553b4978607a6366a9653b.woff") format("woff"), url("//db.onlinewebfonts.com/t/a059538dbb553b4978607a6366a9653b.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/a059538dbb553b4978607a6366a9653b.svg#Cronos Pro") format("svg"); }
@@ -32,6 +32,9 @@
     cursor: pointer;
  }
 
+ .image_preview_content{
+     padding-top: 30px;
+ }
  
  .image_preview{
      max-width: 100%;

@@ -3,7 +3,7 @@
  * @Author: Albert
  * @Date:   2022-03-26 05:48:53
  * @Last Modified by:   Your name
- * @Last Modified time: 2022-04-05 18:30:06
+ * @Last Modified time: 2022-04-21 13:44:37
  */
 
 require_once('gw2.class.php');
@@ -18,13 +18,13 @@ class guilds extends gw2{
     
    public function loadAll()
    {
-        $query = 'SELECT * FROM guild ORDER BY name';
+        $query = 'SELECT guild.* FROM guild ORDER BY guild.name';
 
         $types = "";
         $params = array();
         $guilds = $this->query($query, $types, $params);
 
-        if(!is_null($guilds))
+        if(sizeof($guilds) > 0)
         {
             $result = array();
             foreach($guilds AS $g){
