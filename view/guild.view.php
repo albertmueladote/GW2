@@ -3,7 +3,7 @@
  * @Author: Albert
  * @Date:   2022-04-01 18:26:51
  * @Last Modified by:   Your name
- * @Last Modified time: 2022-04-20 09:19:13
+ * @Last Modified time: 2022-04-22 17:25:25
  */
 ?>
 <!DOCTYPE html>
@@ -19,12 +19,19 @@
   <body>
     <?php require(BLOCKS . 'topmenu.php'); ?>
     <div class="container-fluid">
+      <?php if($is_leader){ ?>
+        <div class="guild_menu">
+          <form>
+
+          </form>
+        </div>  
+      <?php } ?>  
       <div class="rows">
       </div>
       <?php if($is_leader){ ?>
         <div class="main_panel"><button id="add_row">Añadir fila</button></div>
       <?php } ?>  
-  </div>
+    </div>
     <?php require(BLOCKS . 'footer.php'); ?>
     <script src="<?php echo JS . 'guild.js'?>"></script>
     <script src="https://www.jsviews.com/download/jsrender.min.js"></script>
